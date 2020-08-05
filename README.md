@@ -45,7 +45,7 @@
 
 3. 安装chrome浏览器，并查看chrome版本
 
-4. http://npm.taobao.org/mirrors/chromedriver/下载最为接近你的chrome版本的驱动
+4. http://npm.taobao.org/mirrors/chromedriver/ 下载最为接近你的chrome版本的驱动
 
    > **不要**双击运行解压得到的exe文件，看下一步！
 
@@ -76,7 +76,7 @@
    google-chrome --version
    ```
 
-4. http://npm.taobao.org/mirrors/chromedriver/下载最为接近你的chrome版本的驱动
+4. http://npm.taobao.org/mirrors/chromedriver/ 下载最为接近你的chrome版本的驱动
 
 5. 打开`run.py`按照注释修改对应处（第24、27、35行），打开`data.py`按照注释修改第3行
 
