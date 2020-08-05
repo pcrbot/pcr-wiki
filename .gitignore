@@ -1,0 +1,4 @@
+spider/chromedriver.exe
+spider/cache/
+__pycache__/
+.vscode/
