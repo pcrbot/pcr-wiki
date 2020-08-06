@@ -2,14 +2,15 @@ from hoshino import config, Service, priv
 from hoshino.typing import CQEvent
 from .. import chara
 from .data import *
-# from .run import update
 
-sv = Service('wiki', help_='''
+sv_help = '''
 [@bot简介ue] 角色简介
 [@bot技能ue] 角色技能
-[@bot技能ue] 角色专武
+[@bot专武ue] 角色专武
 [@bot羁绊ue] 角色羁绊
-'''.strip(), bundle='pcr查询')
+'''.strip()
+
+sv = Service('wiki', help_=sv_help, bundle='pcr查询')
 
 def get_chara(name, types):
     id_ = chara.name2id(name)
@@ -70,34 +71,3 @@ async def kizuna(bot, ev: CQEvent):
         return
     result = get_chara(name,'kizuna')
     await bot.send(ev, result)
-
-# @sv.on_prefix(('更新wiki'))
-# async def update_wiki(bot, ev: CQEvent):
-#     if priv.get_user_priv(ev) < priv.SUPERUSER:
-#         return
-#     name = ev.message.extract_plain_text().strip()
-#     if not name:
-#         await bot.send(ev, '请发送"更新wiki"+别称，如"更新wiki水电"')
-#         return
-#     id_ = chara.name2id(name)
-#     confi = 100
-#     if id_ == chara.UNKNOWN:
-#         id_, guess_name, confi = chara.guess_id(name)
-#     c = chara.fromid(id_)
-#     msg = ''
-#     is_npc = chara.is_npc(id_)
-#     if confi < 100:
-#         msg = f'兰德索尔似乎没有叫"{name}"的人...\n角色别称补全计划: github.com/Ice-Cirno/HoshinoBot/issues/5\n您有{confi}%的可能在找{guess_name}{c.icon.cqcode}'
-#         await bot.send(ev, msg)
-#         return
-#     elif is_npc:
-#         msg = f'不能更新npc角色的数据'
-#         await bot.send(ev, msg)
-#         return
-#     else:
-#         await bot.send(ev, f'正在更新{name}的wiki数据')
-#         try:
-#             update(id_)
-#             await bot.send(ev, f'更新数据成功')
-#         except:
-#             await bot.send(ev, f'更新数据失败')
