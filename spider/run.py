@@ -29,11 +29,14 @@ opt.add_argument('–disk-cache-size=134217728')#缓存最大128Mb
 opt.add_argument('--disable-javascript')
 opt.add_argument('--disable-images')
 opt.add_argument('--disable-plugins')
+opt.add_argument('--ignore-certificate-errors') #忽略证书错误
+opt.add_argument('--ignore-ssl-errors') #忽略证书错误
 driver = webdriver.Chrome(executable_path=path, options=opt)
 
 try:
     for idx, names in _pcr_data.CHARA_NAME.items():
-        if idx == 1805 and idx not in UnavailableChara:# 此处1805更改为想要爬取的角色id
+        # if idx >= 1127 and idx <= 1805 and idx not in UnavailableChara:# 批量更新，自行替换1127-1805为更新范围
+        if idx == 1805 and idx not in UnavailableChara:# 单条更新，此处1805更改为想要爬取的角色id
             name_zh = names[0].replace('(','（').replace(')','）')
             name = convert(f'{name_zh}', 'zh-hant')
 
