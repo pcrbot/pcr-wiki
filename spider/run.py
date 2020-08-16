@@ -36,7 +36,7 @@ driver = webdriver.Chrome(executable_path=path, options=opt)
 try:
     for idx, names in _pcr_data.CHARA_NAME.items():
         # if idx >= 1127 and idx <= 1805 and idx not in UnavailableChara:# 批量更新，自行替换1127-1805为更新范围
-        if idx == 1805 and idx not in UnavailableChara:# 单条更新，此处1805更改为想要爬取的角色id
+        if idx == 1136 and idx not in UnavailableChara:# 单条更新，此处1805更改为想要爬取的角色id
             name_zh = names[0].replace('(','（').replace(')','）')
             name = convert(f'{name_zh}', 'zh-hant')
 
