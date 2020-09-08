@@ -2,6 +2,7 @@ import os
 import peewee as pw
 import requests
 import functools
+import hashlib
 from PIL import Image
 from io import BytesIO
 from zhconv import convert
@@ -12,6 +13,17 @@ from hoshino.util import pic2b64
 logger = log.new_logger('wiki')
 
 UNKNOWN = 1000
+
+def get_file_md5():
+    myhash = hashlib.md5()
+    f = open(os.path.join(os.path.dirname(__file__), 'data.db'), "rb")
+    while True:
+        b = f.read(8096)
+        if not b:
+            break
+        myhash.update(b)
+    f.close()
+    return myhash.hexdigest()
 
 def custom_sorted(x,y):
     order = ['必殺技','必殺技+','技能1','專武強化技能1','技能2','EX技能','EX技能+']
