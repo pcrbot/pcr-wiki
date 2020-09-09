@@ -79,7 +79,7 @@ async def update_wiki(bot, ev: CQEvent):
     if priv.get_user_priv(ev) < priv.SUPERUSER:
         return
     local_version = get_file_md5()
-    download_addres = 'https://alphaone-my.sharepoint.cn/personal/yu_vip_tg/_layouts/15/download.aspx?UniqueId=90bc6f10-7493-45fd-90e9-9d3083fcc8c1&Translate=false&tempauth=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvYWxwaGFvbmUtbXkuc2hhcmVwb2ludC5jbkAzYjFjODFiMS1kMTU2LTRhZjktYjE2OS1hZTA4MTI4YzAzOTYiLCJpc3MiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAiLCJuYmYiOiIxNTk5NTMxMzU3IiwiZXhwIjoiMTU5OTUzNDk1NyIsImVuZHBvaW50dXJsIjoiK1M1LzlHRWJwYnFMV1pPN1M4TGcvc09QanRxVWJpZFE3R2tvb3hINnZIOD0iLCJlbmRwb2ludHVybExlbmd0aCI6IjE0MCIsImlzbG9vcGJhY2siOiJUcnVlIiwiY2lkIjoiWkRObFl6WXdNVEF0WTJJMFppMDBNMlUxTFRsbE1qVXRZV0k1TlRBek1XWmpaR1JsIiwidmVyIjoiaGFzaGVkcHJvb2Z0b2tlbiIsInNpdGVpZCI6Ik0ySTRNbU16WkRrdFpXWmlaUzAwWWpnekxUaGxaV1F0Tmprd09HVmxZbVJpTXpsbCIsImFwcF9kaXNwbGF5bmFtZSI6ImRyaXZlLm1pY2hpa2F3YWNoaW4uYXJ0Iiwic2lnbmluX3N0YXRlIjoiW1wia21zaVwiXSIsImFwcGlkIjoiODZkNzEzOGItMmFhYS00NzZlLTk4MDgtZDRkZGQ5NWIzZjNjIiwidGlkIjoiM2IxYzgxYjEtZDE1Ni00YWY5LWIxNjktYWUwODEyOGMwMzk2IiwidXBuIjoieXVAdmlwLnRnIiwicHVpZCI6IjEwMDMzMjMwQzU3N0FDOTgiLCJjYWNoZWtleSI6IjBoLmZ8bWVtYmVyc2hpcHwxMDAzMzIzMGM1NzdhYzk4QGxpdmUuY29tIiwic2NwIjoiYWxsZmlsZXMud3JpdGUiLCJ0dCI6IjIiLCJ1c2VQZXJzaXN0ZW50Q29va2llIjpudWxsfQ.WG5Oc3oyYkdOSVQ1TzI3T2hENW9remhGS1E0bWRtUFpWajhyUURjTXBRQT0&ApiVersion=2.0'
+    download_addres = 'https://wiki.calloy.com.cn/version.json'
     f = requests.get(download_addres)
     with open(os.path.join(os.path.dirname(__file__), 'version.json'), "wb") as code:
         code.write(f.content)
