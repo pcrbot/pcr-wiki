@@ -9,7 +9,6 @@ import _pcr_data
 UnavailableChara = {
     1000,   # 未知角色
     1067,   # 穗希
-    # 1068,   # 晶
     1069,   # 霸瞳
     1072,   # 可萝爹
     1073,   # 拉基拉基
@@ -35,8 +34,8 @@ driver = webdriver.Chrome(executable_path=path, options=opt)
 
 try:
     for idx, names in _pcr_data.CHARA_NAME.items():
-        # if idx >= 1001 and idx <= 1805 and idx not in UnavailableChara:# 批量更新，自行替换为更新范围
-        if idx == 1146 and idx not in UnavailableChara:# 单条更新，此处数字更改为想要爬取的角色id
+        if idx >= 1131 and idx <= 1136 and idx not in UnavailableChara:# 批量更新，自行替换为更新范围
+        # if idx == 1023 and idx not in UnavailableChara:# 单条更新，此处数字更改为想要爬取的角色id
             name_zh = names[0].replace('(','（').replace(')','）')
             name = convert(f'{name_zh}', 'zh-hant')
 
