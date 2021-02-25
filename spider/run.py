@@ -34,11 +34,11 @@ driver = webdriver.Chrome(executable_path=path, options=opt)
 
 try:
     for idx, names in _pcr_data.CHARA_NAME.items():
-        # if idx >= 1119 and idx <= 1121 and idx not in UnavailableChara:# 批量更新，自行替换为更新范围
-        if idx == 1006 and idx not in UnavailableChara:# 单条更新，此处数字更改为想要爬取的角色id
+        # if idx >= 1801 and idx <= 1805 and idx not in UnavailableChara:# 批量更新，自行替换为更新范围
+        if idx == 1156 and idx not in UnavailableChara:# 单条更新，此处数字更改为想要爬取的角色id
             name_zh = names[0].replace('(','（').replace(')','）')
             name = convert(f'{name_zh}', 'zh-hant')
-
+            # 特殊：怜（萬聖節）
             driver.get(f'https://pcredivewiki.tw/Character/Detail/{name}')
 
             print(driver.title)
