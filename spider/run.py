@@ -1,10 +1,12 @@
+import os
+import re
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
-from zhconv import convert
 from Fetch import fetch
 from data import *
-import _pcr_data
 
 UnavailableChara = {
     1000,   # 未知角色
@@ -20,35 +22,41 @@ UnavailableChara = {
 }
 
 start = datetime.now()
-path = 'C:\\Users\cwx_x\Documents\workSpace\python\pcr_wiki\spider\chromedriver.exe'#此处更改为你存放chromedriver的地址
+
 opt = Options()
 opt.add_argument('--headless')
-opt.add_argument('--disk-cache-dir=C:\\Users\cwx_x\Documents\workSpace\python\pcr_wiki\spider\cache')#此处更改为你想存放缓存的地址
+opt.add_argument(f"--disk-cache-dir={os.path.join(os.path.dirname(__file__), 'cache')}")#此处更改为你想存放缓存的地址
 opt.add_argument('–disk-cache-size=134217728')#缓存最大128Mb
 opt.add_argument('--disable-javascript')
 opt.add_argument('--disable-images')
 opt.add_argument('--disable-plugins')
 opt.add_argument('--ignore-certificate-errors') #忽略证书错误
 opt.add_argument('--ignore-ssl-errors') #忽略证书错误
-driver = webdriver.Chrome(executable_path=path, options=opt)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager(url="https://cdn.npmmirror.com/binaries/chromedriver", latest_release_url="https://cdn.npmmirror.com/binaries/chromedriver/LATEST_RELEASE").install()), options=opt)
 
 try:
-    for idx, names in _pcr_data.CHARA_NAME.items():
-        if idx >= 1801 and idx <= 1806 and idx not in UnavailableChara:# 批量更新，自行替换为更新范围
+    driver.get('https://pcredivewiki.tw/Character')
+    anm_boxes = driver.find_elements_by_class_name('anm-float')
+    chara_list = []
+    for anm in anm_boxes:
+        anm_img = anm.find_elements_by_class_name('img-fluid')[0]
+        src = anm_img.get_attribute('src')
+        matches = re.match(r'.*icon_unit_(\d+)\.', src)
+        idx = int(matches.group(1)[0:4])
+        name = anm.find_elements_by_class_name('card-footer')[0].text
+        chara_list.append(dict({
+            'idx': idx,
+            'name': name
+        }))
+
+    for chara in chara_list:
+        idx = chara.get('idx')
+        name = chara.get('name')
+        if idx > 0 and idx not in UnavailableChara:# 批量更新，自行替换为更新范围
         # if idx == 1156 and idx not in UnavailableChara:# 单条更新，此处数字更改为想要爬取的角色id
-            name_zh = names[0].replace('(','（').replace(')','）')
-            name = convert(f'{name_zh}', 'zh-hant').replace('憐','怜')
-            # 特殊：怜（萬聖節）
             driver.get(f'https://pcredivewiki.tw/Character/Detail/{name}')
 
             print(driver.title)
-            if("undefined" in driver.title ):
-                driver.get(f'https://pcredivewiki.tw/Character/Detail/{name_zh}')
-                print(driver.title)
-                if("undefined" in driver.title ):
-                    name_jp = names[1].replace('(','（').replace(')','）')
-                    driver.get(f'https://pcredivewiki.tw/Character/Detail/{name_jp}')
-                    print(driver.title)
 
             info = fetch(driver)
 
@@ -108,7 +116,7 @@ try:
 
             time = datetime.now()
             t = time - start
-            print(f'用时：{t}，已更新编号{idx}{name_zh}角色数据')
+            print(f'用时：{t}，已更新编号{idx}{name}角色数据')
         # else:
             # print('跳过npc角色')
 except Exception as ex:
