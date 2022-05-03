@@ -44,19 +44,13 @@
 
 2. 将你需要更新的`data.db`准备好
 
-3. 安装chrome浏览器，并查看chrome版本
+3. 安装chrome浏览器
 
-4. http://npm.taobao.org/mirrors/chromedriver/ 下载最为接近你的chrome版本的驱动
+4. 打开`data.py`按照注释修改第3行
 
-   > **不要**双击运行解压得到的exe文件，看下一步！
+5. 运行`run.py`
 
-5. 打开`run.py`按照注释修改对应处（第24、27、38或39行），打开`data.py`按照注释修改第3行
-
-6. 将你最新的`_pcr_data.py`复制到`spider`文件夹下替换（保证`spider/_pcr_data.py`里有你需要更新的id信息）
-
-7. 运行`run.py`
-
-8. 若无报错，则更新成功，得到最新的`data.db`，替换掉你`hoshino/modules/priconne/wiki`下的同名件
+6. 若无报错，则更新成功，得到最新的`data.db`，替换掉你`hoshino/modules/priconne/wiki`下的同名件
 
 #### Linux
 
@@ -77,13 +71,9 @@
    google-chrome --version
    ```
 
-4. http://npm.taobao.org/mirrors/chromedriver/ 下载最为接近你的chrome版本的驱动
+4. 打开`data.py`按照注释修改第3行
 
-5. 打开`run.py`按照注释修改对应处（第24、27、38或39行），打开`data.py`按照注释修改第3行
+5. 运行`run.py`
 
-6. 将你最新的`_pcr_data.py`复制到`spider`文件夹下替换（保证`spider/_pcr_data.py`里有你需要更新的id信息）
-
-7. 运行`run.py`
-
-8. 若无报错，则更新成功，得到最新的`data.db`，替换掉你`hoshino/modules/priconne/wiki`下的同名件
+6. 若无报错，则更新成功，得到最新的`data.db`，替换掉你`hoshino/modules/priconne/wiki`下的同名件
 
